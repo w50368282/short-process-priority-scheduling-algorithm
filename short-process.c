@@ -7,7 +7,6 @@ struct pcb {
 	char name[10];
 	char state;
 	int ntime;
-	int rtime;
 	int atime;
 	struct pcb* link;
 }*ready = NULL, *p;
@@ -86,7 +85,6 @@ void input()
 		printf("\n Please enter the time required for the process to run:");
 		scanf("%d", &p->ntime);
 		printf("\n");
-		p->rtime = 0;
 		p->state = 'w';
 		p->link = NULL;
 		linkpcb();
@@ -96,12 +94,11 @@ void input()
 
 void disp(PCB * pr) 
 {
-	printf("\n Process name \t Process status \t Time of arrival \t Running time \t Already runningtime \n");
+	printf("\n Process name \t Process status \t Time of arrival \t Running time \n");
 	printf("%s\t", pr->name);
 	printf("%c\t", pr->state);
 	printf("%d\t", pr->atime);
 	printf("%d\t", pr->ntime);
-	printf("%d\t", pr->rtime);
 	printf("\n");
 }
 void check()
@@ -131,7 +128,6 @@ void destroy()
 void running()
 {
 	runningTime += p->ntime;
-	p->rtime = p->ntime;
 	if (ready != NULL && runningTime < ready->atime) {
 		runningTime = ready->atime;
 	}
