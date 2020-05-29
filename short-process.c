@@ -97,20 +97,20 @@ void input()
 void disp(PCB * pr) 
 {
 	printf("\n Process Name \t Process Status \t Time of arrival \t Time required to run \t Time already running \n");
-	printf("|%s\t", pr->name);
-	printf("|%c\t", pr->state);
-	printf("|%d\t", pr->atime);
-	printf("|%d\t", pr->ntime);
-	printf("|%d\t", pr->rtime);
+	printf("%s\t", pr->name);
+	printf("%c\t", pr->state);
+	printf("%d\t", pr->atime);
+	printf("%d\t", pr->ntime);
+	printf("%d\t", pr->rtime);
 	printf("\n");
 }
 void check() 
 {
 	PCB* pr;
-	printf("\n **** The current ready queue state is:%s", p->name); 
+	printf("\n **** The currently running process is:%s", p->name); 
 	disp(p);
 	pr = ready;
-	printf("\n ****The current status of the postscript line is:\n");
+	printf("\n ****The current ready queue state is:\n");
 	if (pr == NULL)printf("\n The ready queue is empty. \n ");
 	while (pr != NULL)
 	{
