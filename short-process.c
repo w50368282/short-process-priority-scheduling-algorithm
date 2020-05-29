@@ -3,12 +3,12 @@
 
 #define getpch(type) (type*)malloc(sizeof(type)) 
 #define NULL 0 
-struct pcb { /* 定义进程控制块PCB */
+struct pcb {
 	char name[10];
-	char state;//进程状态
-	int ntime;//需要时间
-	int rtime;//已经执行时间
-	int atime;//到达时间 
+	char state;
+	int ntime;
+	int rtime;
+	int atime;
 	struct pcb* link;
 }*ready = NULL, *p;
 typedef struct pcb PCB;
@@ -26,12 +26,12 @@ int space()
 void linkpcb() {
 	PCB *first, *second;
 	int insert = 0;
-	if (ready == NULL) /*,插入队首*/
+	if (ready == NULL)
 	{
 		p->link = ready;
 		ready = p;
 	}
-	else {//插入队尾 
+	else {
 		first = ready;
 		second = first->link;
 		while (second != NULL)
@@ -42,9 +42,9 @@ void linkpcb() {
 		first->link = p;
 	}
 }
-void sort() { /* 建立对进程进行短进程排列函数*/
+void sort() {
 	PCB *first, *second;
-	if (ready == NULL || space() == 1) /*,插入队首*/
+	if (ready == NULL || space() == 1)
 	{
 		return;
 	}
@@ -67,23 +67,23 @@ void sort() { /* 建立对进程进行短进程排列函数*/
 		}
 	}
 }
-void input() /* 建立进程控制块函数*/
+void input()
 {
 	int i, num;
-	//clrscr(); /*清屏*/
+	//clrscr();
 	system("cls");
-	printf("            ***************************短进程优先调度算法******************************");
-	printf("\n 请输入即将运行的进程总数目：");
+	printf("            *************************Short process priority scheduling algorithm***********************");
+	printf("\n Please enter the total number of processes to run：");
 	scanf("%d", &num);
 	for (i = 0; i < num; i++)
 	{
 		
-		p = getpch(PCB);//申请空间，指针 
-		printf("\n 请输入进程名称:");
+		p = getpch(PCB);
+		printf("\n Please enter a process name:");
 		scanf("%s", p->name);
-		printf("\n 请输入进程到达时间:");
+		printf("\n Please enter the process arrival time:");
 		scanf("%d", &p->atime);
-		printf("\n 请输入进程运行所需时间:");
+		printf("\n Please enter the time required for the process to run:");
 		scanf("%d", &p->ntime);
 		printf("\n");
 		p->rtime = 0;
@@ -94,24 +94,24 @@ void input() /* 建立进程控制块函数*/
 
 }
 
-void disp(PCB * pr) /*建立进程显示函数,用于显示当前进程*/
+void disp(PCB * pr) 
 {
-	printf("\n 进程名称 \t 进程状态 \t 到达时间 \t 运行所需时间 \t 已经运行时间 \n");
-	printf("|%s\t", pr->name);
-	printf("|%c\t", pr->state);
-	printf("|%d\t", pr->atime);
-	printf("|%d\t", pr->ntime);
-	printf("|%d\t", pr->rtime);
+	printf("\n Process name \t Process status \t Time of arrival \t Running time \t Already running time \n");
+	printf("%s\t", pr->name);
+	printf("%c\t", pr->state);
+	printf("%d\t", pr->atime);
+	printf("%d\t", pr->ntime);
+	printf("%d\t", pr->rtime);
 	printf("\n");
 }
-void check() /* 建立进程查看函数 */
+void check()
 {
 	PCB* pr;
-	printf("\n **** 当前正在运行的进程是:%s", p->name); /*显示当前运行进程*/
+	printf("\n **** The currently running process is:%s", p->name);
 	disp(p);
 	pr = ready;
-	printf("\n ****当前就绪队列状态为:\n"); /*显示就绪队列状态*/
-	if (pr == NULL)printf("\n 就绪队列为空。\n ");
+	printf("\n ****The current ready queue state is:\n");
+	if (pr == NULL)printf("\n The ready queue is empty.\n ");
 	while (pr != NULL)
 	{
 		if (pr->atime <= runningTime) {
@@ -123,22 +123,22 @@ void check() /* 建立进程查看函数 */
 		}
 	}
 }
-void destroy() /*建立进程撤消函数(进程运行结束,撤消进程)*/
+void destroy()
 {
-	printf("\n 进程 [%s] 已完成.\n", p->name);
+	printf("\n Process [%s] has been completed.\n", p->name);
 	free(p);
 }
-void running() /* 建立进程就绪函数(进程运行时间到,置就绪状态*/
+void running()
 {
 	runningTime += p->ntime;
 	p->rtime = p->ntime;
 	if (ready != NULL && runningTime < ready->atime) {
 		runningTime = ready->atime;
 	}
-	destroy(); /* 调用destroy函数*/
-	sort(); /*调用sort函数*/
+	destroy();
+	sort();
 }
-int main() /*主函数*/
+int main()
 {
 	int len, h = 0;
 	char ch;
@@ -148,7 +148,7 @@ int main() /*主函数*/
 	while ((len != 0) && (ready != NULL))
 	{
 		printf("********************************\n");
-		printf("当前时刻%d\n", h++);
+		printf("The current moment:%d\n", h++);
 		p = ready;
 		ready = p->link;
 		p->link = NULL;
@@ -157,7 +157,7 @@ int main() /*主函数*/
 		running();
 	
 	}
-	printf("\n\n 进程已经完成.\n");
+	printf("\n\n The process is complete.\n");
 	ch = getchar();
 	system("Pause");
 	return 0;
