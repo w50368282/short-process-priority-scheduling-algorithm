@@ -94,7 +94,7 @@ void input()
 
 void disp(PCB * pr) 
 {
-	printf("\n Process name \t Process status \t Time of arrival \t Running time \n");
+	printf("\n Process name \t Process status \t Time of arrival \t The time it takes to run \n");
 	printf("%s\t", pr->name);
 	printf("%c\t", pr->state);
 	printf("%d\t", pr->atime);
