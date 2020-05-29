@@ -73,18 +73,18 @@ void input()
 	int i, num;
 	//clrscr(); 
 	system("cls");
-	printf("            ***************************짧은 프로세스 우선 순위 알고리즘******************************");
-	printf("\n 실행할 프로세스의 총 수를 입력하세요：");
+	printf("            ***************************short process priority algorithm******************************");
+	printf("\n Please enter the total number of the process to run：");
 	scanf("%d", &num);
 	for (i = 0; i < num; i++)
 	{
 		
 		p = getpch(PCB);
-		printf("\n 프로세스 이름 입력하세요:");
+		printf("\n Please enter process name:");
 		scanf("%s", p->name);
-		printf("\n 프로세스 도착 시간 입력하세요:");
+		printf("\n Please enter process arrival time:");
 		scanf("%d", &p->atime);
-		printf("\n 프로세스 실행에 필요한 시간을 입력하세요:");
+		printf("\n Please enter the time required to execute the process:");
 		scanf("%d", &p->ntime);
 		printf("\n");
 		p->rtime = 0;
@@ -97,7 +97,7 @@ void input()
 
 void disp(PCB * pr) 
 {
-	printf("\n 프로세스 이름 \t 프로세스 상태 \t 도착 시간 \t 운행 소요 시간 \t 이미 가동 시간 \n");
+	printf("\n Process Name \t Process Status \t Time of arrival \t Time required to run \t Time already running \n");
 	printf("|%s\t", pr->name);
 	printf("|%c\t", pr->state);
 	printf("|%d\t", pr->atime);
@@ -108,11 +108,11 @@ void disp(PCB * pr)
 void check() 
 {
 	PCB* pr;
-	printf("\n **** 현재 실행 중인 프로세스는:%s", p->name); 
+	printf("\n **** The current ready queue state is:%s", p->name); 
 	disp(p);
 	pr = ready;
-	printf("\n ****현재 착서 대열의 상태는:\n");
-	if (pr == NULL)printf("\n 전열이 허사가 되다. \n ");
+	printf("\n ****The current status of the postscript line is:\n");
+	if (pr == NULL)printf("\n The ready queue is empty. \n ");
 	while (pr != NULL)
 	{
 		if (pr->atime <= runningTime) {
@@ -126,7 +126,7 @@ void check()
 }
 void destroy()
 {
-	printf("\n 프로세스[%s] 완료됨.\n", p->name);
+	printf("\n Process[%s] has been completed.\n", p->name);
 	free(p);
 }
 void running() 
@@ -149,7 +149,7 @@ int main()
 	while ((len != 0) && (ready != NULL))
 	{
 		printf("********************************\n");
-		printf("현시점%d\n", h++);
+		printf("The current moment%d\n", h++);
 		p = ready;
 		ready = p->link;
 		p->link = NULL;
@@ -158,7 +158,7 @@ int main()
 		running();
 	
 	}
-	printf("\n\n 프로세스가 이미 완료되었습니다.\n");
+	printf("\n\n The process is complete.\n");
 	ch = getchar();
 	system("Pause");
 	return 0;
