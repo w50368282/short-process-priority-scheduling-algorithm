@@ -1,6 +1,5 @@
 #include "stdio.h" 
 #include <stdlib.h> 
-#include <conio.h> 
 
 #define getpch(type) (type*)malloc(sizeof(type)) 
 #define NULL 0 
